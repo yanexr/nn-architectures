@@ -1,0 +1,16 @@
+{
+  "name": "Iris-3B",
+  "lab": "Speridlabs",
+  "released": "2026-10-08",
+  "summary": "A 3B flow-matching transformer that generates raw RGB pixels directly, with no VAE in the loop.",
+  "sizes": ["3B"],
+  "input": ["text"],
+  "output": ["image"],
+  "tags": ["diffusion transformer", "flow matching", "pixel space"],
+  "license": "Apache 2.0",
+  "links": {
+    "huggingface": "https://huggingface.co/speridlabs/iris-3b",
+    "paper": "https://arxiv.org/abs/2610.09450"
+  },
+  "diagrams": [{ "file": "architecture.diagram.jsx", "title": "Architecture" }]
+}

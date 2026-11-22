@@ -1,0 +1,367 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
+
+/* The diagram packages use Tailwind classes for their UI chrome. */
+@source "../../node_modules/@nn-diagram";
+
+/* `.light` re-enables light tokens inside a dark page (e.g. a viewer set to light). */
+@custom-variant dark (&:where(.dark, .dark *):not(:where(.light, .light *)));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-family), ui-serif, Georgia, serif;
+  --font-mono: var(--font-mono-family), ui-monospace, monospace;
+  --font-heading: var(--font-serif-family), ui-serif, Georgia, serif;
+  --color-clay: var(--clay);
+  --color-clay-ink: var(--clay-ink);
+  --color-ochre: var(--ochre);
+  --color-olive: var(--olive);
+  --shadow-paper: var(--paper-shadow);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Palette: warm paper and ink, with clay as the one accent (links, focus,
+ * the mark). Ochre and olive are quiet secondary tones for small details.
+ * `.light` re-applies the light tokens inside a dark page (a viewer set to light).
+ */
+:root,
+.light {
+  color-scheme: light;
+  --background: #faf9f5;
+  --foreground: #1f1e1c;
+  --card: #fffefb;
+  --card-foreground: #1f1e1c;
+  --popover: #fffefb;
+  --popover-foreground: #1f1e1c;
+  --primary: #1f1e1c;
+  --primary-foreground: #faf9f5;
+  --secondary: #f0eee6;
+  --secondary-foreground: #1f1e1c;
+  --muted: #f0eee6;
+  --muted-foreground: #6b675e;
+  --accent: #ebe8de;
+  --accent-foreground: #1f1e1c;
+  --destructive: #b4372a;
+  --border: #e4e1d6;
+  --input: #d9d5c8;
+  --ring: #c96442;
+  --clay: #c96442;
+  --clay-ink: #a64e2f;
+  --ochre: #c9a16b;
+  --olive: #7c8068;
+  --paper-shadow: 0 1px 0 rgb(60 50 30 / 0.04), 0 8px 24px -12px rgb(60 50 30 / 0.18);
+  --chart-1: #c96442;
+  --chart-2: #c9a16b;
+  --chart-3: #7c8068;
+  --chart-4: #6b675e;
+  --chart-5: #1f1e1c;
+  --radius: 0.625rem;
+  --sidebar: #f5f4ee;
+  --sidebar-foreground: #1f1e1c;
+  --sidebar-primary: #1f1e1c;
+  --sidebar-primary-foreground: #faf9f5;
+  --sidebar-accent: #ebe8de;
+  --sidebar-accent-foreground: #1f1e1c;
+  --sidebar-border: #e4e1d6;
+  --sidebar-ring: #c96442;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #1c1b19;
+  --foreground: #f0eee6;
+  --card: #242320;
+  --card-foreground: #f0eee6;
+  --popover: #282724;
+  --popover-foreground: #f0eee6;
+  --primary: #f0eee6;
+  --primary-foreground: #1c1b19;
+  --secondary: #2a2926;
+  --secondary-foreground: #f0eee6;
+  --muted: #2a2926;
+  --muted-foreground: #a39f95;
+  --accent: #32312d;
+  --accent-foreground: #f0eee6;
+  --destructive: #e0705f;
+  --border: #33322e;
+  --input: #3d3b37;
+  --ring: #d97757;
+  --clay: #d97757;
+  --clay-ink: #e3906f;
+  --ochre: #d4b07d;
+  --olive: #a3a78d;
+  --paper-shadow: 0 1px 0 rgb(0 0 0 / 0.2), 0 10px 28px -12px rgb(0 0 0 / 0.6);
+  --chart-1: #d97757;
+  --chart-2: #d4b07d;
+  --chart-3: #a3a78d;
+  --chart-4: #a39f95;
+  --chart-5: #f0eee6;
+  --sidebar: #201f1d;
+  --sidebar-foreground: #f0eee6;
+  --sidebar-primary: #f0eee6;
+  --sidebar-primary-foreground: #1c1b19;
+  --sidebar-accent: #32312d;
+  --sidebar-accent-foreground: #f0eee6;
+  --sidebar-border: #33322e;
+  --sidebar-ring: #d97757;
+}
+
+/*
+ * The editor is a work surface: the same family of colors, but closer to
+ * neutral so the diagram's own colors stay the loudest thing on screen.
+ * Set on <html> (via :has) so the editor's dialogs and menus, which portal
+ * to <body>, get it too.
+ */
+:root:has(.editor-theme) {
+  --background: #fbfbf9;
+  --foreground: #1e1e1c;
+  --card: #ffffff;
+  --popover: #ffffff;
+  --popover-foreground: #1e1e1c;
+  --primary: #1e1e1c;
+  --primary-foreground: #fbfbf9;
+  --secondary: #f2f1ed;
+  --muted: #f2f1ed;
+  --muted-foreground: #57554f;
+  --accent: #ecebe6;
+  --border: #e7e5e0;
+  --input: #dcdad4;
+  --nnd-canvas-light: #f1f0ec;
+  --nnd-canvas-dark: #1a1a19;
+  /* The editor keeps the package's default blue accent (the viewer uses clay). */
+  --nnd-accent: #0d99ff;
+  --ring: #0d99ff;
+}
+.dark:has(.editor-theme) {
+  --background: #1d1d1c;
+  --foreground: #f1f1ee;
+  --card: #232322;
+  --popover: #262625;
+  --popover-foreground: #ededea;
+  --primary: #ededea;
+  --primary-foreground: #1d1d1c;
+  --secondary: #2b2b29;
+  --muted: #2b2b29;
+  --muted-foreground: #b5b3ad;
+  --accent: #323230;
+  --border: #343432;
+  --input: #3e3e3b;
+}
+/* Editor dialogs are UI, not reading text: sans titles (site headings are serif). */
+:root:has(.editor-theme) [data-slot="dialog-title"] {
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    /* Inter with a single-storey a and open digits: softer, less default. */
+    font-feature-settings: "cv11", "ss01";
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--clay) 24%, transparent);
+  }
+  :focus-visible {
+    outline-color: var(--ring);
+  }
+  /* Every clickable control shows the pointer (Tailwind v4 removed it from buttons). */
+  :where(button, [role="button"], [role="tab"], [role="option"], [role="switch"], [role="checkbox"], [role="radio"], select, summary, label[for]):not(:disabled, [aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
+:root {
+  /* Viewer and editor UI: clay selection and highlights, warm canvas around the page. */
+  --nnd-accent: var(--clay);
+  --nnd-canvas-light: #f0eee7;
+  --nnd-canvas-dark: #191816;
+  /* Diagrams keep plain Inter, independent of the site's typographic tweaks. */
+  --nnd-font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --nnd-font-mono: var(--font-mono-family), "JetBrains Mono", ui-monospace, monospace;
+}
+.nnd-root {
+  font-feature-settings: normal;
+}
+
+/* Small uppercase labels (facets, spec sheet, eyebrows). */
+@layer components {
+  .label-caps {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Horizontal chip rows on small screens fade out at the edge instead of clipping. */
+  @media (width < 64rem) {
+    .fade-x {
+      mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
+    }
+  }
+}
+
+/* Markdown articles (model descriptions): set like a book. */
+.article {
+  font-family: var(--font-serif);
+  /* Newsreader has a small x-height and fine strokes: a touch larger and
+     heavier than a sans at the same size, in full ink, reads like Claude's text. */
+  font-size: 1.03rem;
+  font-weight: 450;
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  color: var(--foreground);
+  --tw-prose-body: currentColor;
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--foreground);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-quotes: var(--muted-foreground);
+  --tw-prose-quote-borders: var(--clay);
+  --tw-prose-bullets: var(--clay);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+.dark .article {
+  /* Light text on dark looks heavier already. */
+  font-weight: 400;
+  color: color-mix(in oklab, var(--foreground) 94%, var(--background));
+}
+.article :where(strong, b) {
+  font-weight: 650;
+}
+.article :where(h2, h3, h4) {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.article :where(h2) {
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin-top: 1.9em;
+  margin-bottom: 0.5em;
+}
+.article :where(p, ul, ol, table, pre) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+.article :where(li) {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+.article > :first-child {
+  margin-top: 0;
+}
+.article :where(h3) {
+  font-size: 1.1rem;
+  margin-top: 1.6em;
+}
+.article :where(a) {
+  text-decoration-color: color-mix(in oklab, var(--clay) 60%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.article :where(a):hover {
+  color: var(--clay-ink);
+  text-decoration-color: currentColor;
+}
+.article :where(code):not(:where(pre *)) {
+  font-size: 0.82em;
+  font-weight: 450;
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+  background: var(--muted);
+}
+.article :where(table, ul, ol, pre, figcaption) {
+  font-family: var(--font-sans);
+}
+.article :where(table, pre) {
+  font-size: 0.8rem;
+}
+.article :where(ul, ol) {
+  font-family: var(--font-serif);
+}
+.article :where(th) {
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.article :where(pre) {
+  background: var(--muted);
+  color: var(--foreground);
+  border-radius: 0.6rem;
+}
+.article .katex {
+  font-size: 1.08em;
+}
+.article .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0 0.75rem;
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, var(--muted-foreground) 35%, transparent) transparent;
+  }
+}
+
+html:has(.app-fullscreen),
+html:has(.app-fullscreen) body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}

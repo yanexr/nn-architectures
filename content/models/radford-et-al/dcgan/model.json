@@ -1,0 +1,18 @@
+{
+  "name": "DCGAN",
+  "lab": "Radford, Metz & Chintala",
+  "released": "2015-11-19",
+  "summary": "Deep convolutional GAN: a set of architecture guidelines (strided convolutions, batch norm, no fully connected layers) that made GAN training stable.",
+  "sizes": [],
+  "input": ["noise"],
+  "output": ["image"],
+  "tags": ["GAN", "CNN"],
+  "links": {
+    "paper": "https://arxiv.org/abs/1511.06434",
+    "github": "https://github.com/Newmu/dcgan_code"
+  },
+  "diagrams": [
+    { "file": "generator.diagram.jsx", "title": "Generator" },
+    { "file": "training.diagram.jsx", "title": "Training" }
+  ]
+}
